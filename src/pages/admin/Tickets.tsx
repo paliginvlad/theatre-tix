@@ -22,6 +22,7 @@ import {
   addOrUpdateTicketSection
 } from "@/services/adminService";
 import { Ticket } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 // Секції з підтримкою мультиязичності
 const SECTION_IDS = [
@@ -42,6 +43,7 @@ const AdminTickets = () => {
   const [editPrices, setEditPrices] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [updatingIds, setUpdatingIds] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState<string>("tickets");
 
   useEffect(() => {
     if (!isAdmin) {
@@ -129,10 +131,6 @@ const AdminTickets = () => {
       <Header />
       <main className="flex-grow bg-gray-50 py-12">
         <div className="theatre-container">
-          <div className="mb-6">
-            <h1 className="text-3xl font-bold text-theatre-burgundy">{t("admin.tickets.title")}</h1>
-            <p className="text-gray-600 mt-2">{t("admin.tickets.setPrice")}</p>
-          </div>
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <Table>
               <TableHeader>

@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -29,6 +28,7 @@ import AdminTickets from "./pages/admin/Tickets";
 import AdminReports from "./pages/admin/Reports";
 import AdminSalaries from "./pages/admin/Salaries";
 import AdminNews from "./pages/admin/News";
+import Profit from "./pages/admin/Profit";
 import PrivacyPolicy from "./pages/policies/PrivacyPolicy";
 import TermsOfService from "./pages/policies/TermsOfService";
 import RefundPolicy from "./pages/policies/RefundPolicy";
@@ -71,6 +71,7 @@ const App = () => (
               <Route path="/admin/reports" element={<AdminReports />} />
               <Route path="/admin/salaries" element={<AdminSalaries />} />
               <Route path="/admin/news" element={<AdminNews />} />
+              <Route path="/admin/profit" element={<Profit />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

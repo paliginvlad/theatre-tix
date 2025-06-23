@@ -158,7 +158,7 @@ const Profile = () => {
       });
       setIsDeleteDialogOpen(false);
       logout();
-      window.location.href = "/login";
+      window.location.href = "/"; // Перенаправление на главную страницу
     } catch (error: any) {
       toast.error(error?.response?.data?.error || "Failed to delete profile");
     }
@@ -439,7 +439,7 @@ const Profile = () => {
           <DialogHeader>
             <DialogTitle>{t("profile.deleteProfile")}</DialogTitle>
           </DialogHeader>
-          <div className="mb-4">Are you sure you want to delete your profile?</div>
+          <div className="mb-4">{t("profile.deleteProfile.subtitle")}</div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>{t("profile.cancel")}</Button>
             <Button variant="destructive" onClick={handleDeleteProfile}>{t("profile.deleteProfile")}</Button>

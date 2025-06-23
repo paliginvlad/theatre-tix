@@ -72,6 +72,44 @@ db.run(createNewsTable, (err) => {
   if (err) console.error('Error creating news table', err);
 });
 
+// Sold tickets table
+const createSoldTicketsTable = `CREATE TABLE IF NOT EXISTS sold_tickets (
+  section_id TEXT PRIMARY KEY,
+  sold INTEGER DEFAULT 0
+);`;
+db.run(createSoldTicketsTable, (err) => {
+  if (err) console.error('Error creating sold_tickets table', err);
+});
+
+// --- LAST PROFIT API ---
+const createProfitTable = `CREATE TABLE IF NOT EXISTS last_profit (
+  section_id TEXT PRIMARY KEY,
+  profit INTEGER DEFAULT 0
+);
+CREATE TABLE IF NOT EXISTS last_total_profit (
+  id INTEGER PRIMARY KEY CHECK (id = 1),
+  total INTEGER DEFAULT 0
+);
+`;
+db.exec(createProfitTable, (err) => {
+  if (err) console.error('Error creating last_profit/last_total_profit tables', err);
+});
+
+// Comments table
+const createCommentsTable = `CREATE TABLE IF NOT EXISTS comments (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  performance_id TEXT NOT NULL,
+  user_id TEXT NOT NULL,
+  user_name TEXT NOT NULL,
+  text TEXT NOT NULL,
+  rating INTEGER NOT NULL,
+  date TEXT NOT NULL
+);`;
+db.run(createCommentsTable, (err) => {
+  if (err) console.error('Error creating comments table', err);
+});
+
+
 // Ensure default admin exists
 const ensureAdmin = () => {
   db.get('SELECT * FROM users WHERE username = ?', ['admin'], async (err, row) => {
@@ -293,6 +331,103 @@ app.delete('/api/news/:id', (req, res) => {
   const { id } = req.params;
   db.run('DELETE FROM news WHERE id = ?', [id], function(err) {
     if (err) return res.status(500).json({ error: 'Failed to delete news' });
+    res.json({ success: true });
+  });
+});
+
+// --- SOLD TICKETS API ---
+app.get('/api/sold-tickets', (req, res) => {
+  db.all('SELECT * FROM sold_tickets', (err, rows) => {
+    if (err) return res.status(500).json({ error: 'Failed to fetch sold tickets' });
+    res.json(rows);
+  });
+});
+
+app.post('/api/sold-tickets', (req, res) => {
+  const { sold } = req.body; // { parterre: 10, mezzanine: 5, ... }
+  if (!sold || typeof sold !== 'object') return res.status(400).json({ error: 'Missing sold data' });
+  const sectionIds = Object.keys(sold);
+  db.serialize(() => {
+    sectionIds.forEach(id => {
+      db.run(
+        'INSERT INTO sold_tickets (section_id, sold) VALUES (?, ?) ON CONFLICT(section_id) DO UPDATE SET sold = excluded.sold',
+        [id, sold[id]]
+      );
+    });
+    res.json({ success: true });
+  });
+});
+
+// --- LAST PROFIT API ---
+app.get('/api/last-profit', (req, res) => {
+  db.all('SELECT * FROM last_profit', (err, rows) => {
+    if (err) return res.status(500).json({ error: 'Failed to fetch last profit' });
+    db.get('SELECT total FROM last_total_profit WHERE id = 1', (err2, totalRow) => {
+      if (err2) return res.status(500).json({ error: 'Failed to fetch last total profit' });
+      res.json({ profits: rows, total: totalRow ? totalRow.total : 0 });
+    });
+  });
+});
+
+app.post('/api/last-profit', (req, res) => {
+  const { profits, total } = req.body; // profits: { parterre: 100, ... }, total: number
+  if (!profits || typeof profits !== 'object' || typeof total !== 'number') return res.status(400).json({ error: 'Missing data' });
+  const sectionIds = Object.keys(profits);
+  db.serialize(() => {
+    sectionIds.forEach(id => {
+      db.run(
+        'INSERT INTO last_profit (section_id, profit) VALUES (?, ?) ON CONFLICT(section_id) DO UPDATE SET profit = excluded.profit',
+        [id, profits[id]]
+      );
+    });
+    db.run(
+      'INSERT INTO last_total_profit (id, total) VALUES (1, ?) ON CONFLICT(id) DO UPDATE SET total = excluded.total',
+      [total]
+    );
+    res.json({ success: true });
+  });
+});
+
+// --- COMMENTS API ---
+// Получить все комментарии для спектакля
+app.get('/api/comments/:performanceId', (req, res) => {
+  const { performanceId } = req.params;
+  db.all('SELECT * FROM comments WHERE performance_id = ? ORDER BY date DESC', [performanceId], (err, rows) => {
+    if (err) return res.status(500).json({ error: 'Failed to fetch comments' });
+    res.json(rows);
+  });
+});
+
+// Добавить комментарий
+app.post('/api/comments', (req, res) => {
+  const { performance_id, user_id, user_name, text, rating, date } = req.body;
+  if (!performance_id || !user_id || !user_name || !text || !rating || !date) return res.status(400).json({ error: 'Missing fields' });
+  db.run(
+    'INSERT INTO comments (performance_id, user_id, user_name, text, rating, date) VALUES (?, ?, ?, ?, ?, ?)',
+    [performance_id, user_id, user_name, text, rating, date],
+    function(err) {
+      if (err) return res.status(500).json({ error: 'Failed to add comment' });
+      res.json({ id: this.lastID });
+    }
+  );
+});
+
+// Редактировать комментарий
+app.put('/api/comments/:id', (req, res) => {
+  const { id } = req.params;
+  const { text, rating } = req.body;
+  if (!text || !rating) return res.status(400).json({ error: 'Missing fields' });
+  db.run('UPDATE comments SET text = ?, rating = ? WHERE id = ?', [text, rating, id], function(err) {
+    if (err) return res.status(500).json({ error: 'Failed to update comment' });
+    res.json({ success: true });
+  });
+});
+
+// Удалить комментарий
+app.delete('/api/comments/:id', (req, res) => {
+  const { id } = req.params;
+  db.run('DELETE FROM comments WHERE id = ?', [id], function(err) {
+    if (err) return res.status(500).json({ error: 'Failed to delete comment' });
     res.json({ success: true });
   });
 });

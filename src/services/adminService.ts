@@ -374,3 +374,40 @@ export const updateUserPassword = async (username: string, oldPassword: string, 
 export const deleteUserProfile = async (username: string) => {
   await axios.post('http://localhost:4000/api/delete-profile', { username });
 };
+
+// --- SOLD TICKETS API ---
+export interface SoldTickets {
+  [section_id: string]: number;
+}
+
+export const getSoldTickets = async (): Promise<SoldTickets> => {
+  const res = await axios.get('http://localhost:4000/api/sold-tickets');
+  const sold: SoldTickets = {};
+  res.data.forEach((row: { section_id: string; sold: number }) => {
+    sold[row.section_id] = row.sold;
+  });
+  return sold;
+};
+
+export const updateSoldTickets = async (sold: SoldTickets): Promise<void> => {
+  await axios.post('http://localhost:4000/api/sold-tickets', { sold });
+};
+
+// --- LAST PROFIT API ---
+export interface LastProfit {
+  profits: Record<string, number>;
+  total: number;
+}
+
+export const getLastProfit = async (): Promise<LastProfit> => {
+  const res = await axios.get('http://localhost:4000/api/last-profit');
+  const profits: Record<string, number> = {};
+  res.data.profits.forEach((row: { section_id: string; profit: number }) => {
+    profits[row.section_id] = row.profit;
+  });
+  return { profits, total: res.data.total };
+};
+
+export const updateLastProfit = async (profits: Record<string, number>, total: number): Promise<void> => {
+  await axios.post('http://localhost:4000/api/last-profit', { profits, total });
+};

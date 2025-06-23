@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/context/LanguageContext";
 import { useAuth } from "@/context/AuthContext";
-import { Settings, Ticket, FileText, Calculator, Newspaper } from "lucide-react";
+import { Settings, Ticket, FileText, Calculator, Newspaper, BarChart2 } from "lucide-react";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
@@ -200,12 +200,12 @@ const Admin = () => {
               icon={<Ticket className="h-6 w-6 text-theatre-burgundy" />}
               linkTo="/admin/tickets"
             />
-            <AdminCard
+            {/* <AdminCard
               title={t("admin.reports")}
               description={t("admin.reports.subtitle")}
               icon={<FileText className="h-6 w-6 text-theatre-burgundy" />}
               linkTo="/admin/reports"
-            />
+            /> */}
             <AdminCard
               title={t("admin.salaries")}
               description={t("admin.salaries.subtitle")}
@@ -217,6 +217,12 @@ const Admin = () => {
               description={t("admin.news.subtitle")}
               icon={<Newspaper className="h-6 w-6 text-theatre-burgundy" />}
               linkTo="/admin/news"
+            />
+            <AdminCard
+              title={t("admin.profit.title")}
+              description={t("admin.profit.subtitle")}
+              icon={<BarChart2 className="h-6 w-6 text-theatre-burgundy" />}
+              linkTo="/admin/profit"
             />
             <AdminChangePasswordCard />
           </div>

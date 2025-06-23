@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
 // Define available languages
@@ -46,7 +45,6 @@ const translations: Record<Language, Record<string, string>> = {
     "schedule.director": "Director",
     "schedule.noPerformances": "No performances found",
     "schedule.noPerformancesSubtitle": "There are no performances scheduled for this period.",
-
     // About pages
     "about.history": "Theater History",
     "about.rules": "Visit Rules",
@@ -432,6 +430,7 @@ const translations: Record<Language, Record<string, string>> = {
     "profile.tickets.download": "Download",
     "profile.tickets.return": "Return",
     "profile.deleteProfile" : "Delete Profile",
+    "profile.deleteProfile.subtitle" : "Are you sure you want to delete your profile?",
     "profile.editUsername": "Edit Username",
     "profile.editPassword": "Edit Password",
     "profile.oldPassword": "Old Password",
@@ -567,6 +566,25 @@ const translations: Record<Language, Record<string, string>> = {
     // News
     "news.title": "Theater News",
     
+    // Admin Profit Calculation
+    "admin.profit.title": "Profit Calculation",
+    "admin.profit.subtitle": "Calculation of theater profits",
+    "admin.profit.section": "Section",
+    "admin.profit.price": "Ticket Price",
+    "admin.profit.sold": "Tickets Sold",
+    "admin.profit.profit": "Profit",
+    "admin.profit.total": "Total Profit",
+    "admin.profit.calculate": "Calculate",
+    "admin.profit.currency": "UAH",
+    "admin.profit.chartsTab": "Charts",
+    "admin.profit.pieChart": "Pie Chart",
+    "admin.profit.lineChart": "Line Chart",
+    "admin.profit.donutChart": "Donut Chart",
+    "admin.profit.profitBarChart": "Bar Chart (Profit by section)",
+    "admin.profit.soldBarChart": "Bar Chart (Number of tickets sold by section)",
+    "admin.profit.soldSection": "Number of tickets sold by section",
+    "admin.profit.profitSection": "Profit by section",
+
     // Common
     "language.english": "English",
     "language.ukrainian": "Ukrainian",
@@ -750,7 +768,7 @@ const translations: Record<Language, Record<string, string>> = {
     "home.testimonials.review2.text": "Бронювати квитки було так легко, а місця були точно такими, як описано. Обов'язково скористаюся TheatreTix знову!",
     "home.testimonials.review2.name": "Сара Джонсон",
     "home.testimonials.review2.role": "Постійний відвідувач",
-    "home.testimonials.review3.text": "Костюми та декорації для «Ромео і Джульєтти» були абсолютно приголомшливими. Справжня візуальна насолода!",
+    "home.testimonials.review3.text": "Костюми та декорації для «Ромео і Джульетти» були абсолютно приголомшливими. Справжня візуальна насолода!",
     "home.testimonials.review3.name": "Майкл Браун",
     "home.testimonials.review3.role": "Арт-директор",
     
@@ -925,6 +943,7 @@ const translations: Record<Language, Record<string, string>> = {
     "profile.cancel": "Скасувати",
     "profile.save": "Зберегти зміни",
     "profile.deleteProfile" : "Видалити профіль",
+    "profile.deleteProfile.subtitle" : "Ви впевнені, що хочете видалити свій профіль?",
     "profile.editUsername": "Редагувати ім'я користувача",
     "profile.editPassword": "Редагувати пароль",
     "profile.oldPassword": "Старий пароль",
@@ -1067,6 +1086,26 @@ const translations: Record<Language, Record<string, string>> = {
     // News
     "news.title": "Новини театру",
     
+    // Admin Profit Calculation
+    "admin.profit.title": "Розрахунок прибутку",
+    "admin.profit.subtitle": "Розрахунок прибутку театру",
+    "admin.profit.section": "Секція",
+    "admin.profit.price": "Ціна квитка",
+    "admin.profit.sold": "Продано квитків",
+    "admin.profit.profit": "Прибуток",
+    "admin.profit.total": "Загальний прибуток",
+    "admin.profit.calculate": "Розрахувати",
+    "admin.profit.currency": "ГРН",
+    "admin.profit.chartsTab": "Діаграми",
+    "admin.profit.pieChart": "Кругова діаграма (відсоток)",
+    "admin.profit.barChart": "Стовпчикова діаграма",
+    "admin.profit.lineChart": "Лінійний графік",
+    "admin.profit.donutChart": "Кільцева діаграма",
+    "admin.profit.profitBarChart": "Гістограма",
+    "admin.profit.soldBarChart": "Гістограма",
+    "admin.profit.soldSection": "Кількість проданих квитків за секціями",
+    "admin.profit.profitSection": "Прибуток за секціями",
+
     // Common
     "language.english": "Англійська",
     "language.ukrainian": "Українська",

@@ -180,8 +180,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Newsletter */}
-      <section className="py-16 bg-theatre-burgundy text-white">
+     
+      {/* <section className="py-16 bg-theatre-burgundy text-white">
         <div className="theatre-container text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">{t("home.newsletter.title")}</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
@@ -199,7 +199,7 @@ const Index = () => {
             </Button>
           </div>
         </div>
-      </section>
+      </section> */}
       
       <Footer />
     </div>

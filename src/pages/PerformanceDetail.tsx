@@ -47,7 +47,8 @@ const PerformanceDetail = () => {
   // Format date for display
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(language === 'ua' ? 'uk-UA' : undefined, options);
+    // Always use 'en-US' for English, 'uk-UA' for Ukrainian
+    return new Date(dateString).toLocaleDateString(language === 'ua' ? 'uk-UA' : 'en-US', options);
   };
   
   const handleSubmitComment = async () => {
@@ -172,7 +173,6 @@ const PerformanceDetail = () => {
                 <div className="flex items-center">
                   <Star size={20} className="mr-2 text-theatre-gold" fill="#D4AF37" />
                   <span>{averageRating} / 5</span>
-                  <span className="ml-1 text-gray-300">({performance.ratings.length} {t("performance.reviews")})</span>
                 </div>
               </div>
             </div>
@@ -324,7 +324,6 @@ const PerformanceDetail = () => {
                           <Star size={20} className="mr-1 text-theatre-gold" fill="#D4AF37" />
                           <span className="font-semibold">{averageRating}</span>
                           <span className="text-gray-500 ml-1">/ 5</span>
-                          <span className="text-gray-500 ml-1">({performance.ratings.length} {t("performance.reviews")})</span>
                         </div>
                       </div>
                       
@@ -475,16 +474,12 @@ function getUkrainianDescription(name: string): string {
 
 function getUkrainianDirectorName(director: string): string {
   switch (director) {
-    case "Sarah Johnson":
-      return "Сара Джонсон";
-    case "Robert Wilson":
-      return "Роберт Вілсон";
-    case "David Thompson":
-      return "Девід Томпсон";
-    case "Elizabeth Roberts":
-      return "Єлизавета Робертс";
-    case "Andrew Peterson":
-      return "Андрій Петерсон";
+    case "Monika Roszko":
+      return "Моніка Рошко";
+    case "Regrut Valery":
+      return "Валерій Регрут";
+    case "Jamie Muscato":
+      return "Джеймі Мускато";
     default:
       return director;
   }

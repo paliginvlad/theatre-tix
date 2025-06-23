@@ -39,7 +39,7 @@ const performances: Performance[] = [
     startTime: "19:00",
     endTime: "22:00",
     description: "The Tragedy of Hamlet, Prince of Denmark, is a tragedy written by William Shakespeare between 1599 and 1602. Set in Denmark, the play depicts Prince Hamlet and his revenge against his uncle, Claudius, who has murdered Hamlet's father in order to seize his throne and marry Hamlet's mother.",
-    director: "Sarah Johnson",
+    director: "Jamie Muscato",
     actors: ["Michael Stone", "Emma Williams", "Daniel Brown", "Sophia Lee"],
     images: [
       "/site_photos/hamlet_1.png",
@@ -73,7 +73,7 @@ const performances: Performance[] = [
     startTime: "20:00",
     endTime: "22:30",
     description: "Romeo and Juliet is a tragedy written by William Shakespeare early in his career about two young Italian star-crossed lovers whose deaths ultimately reconcile their feuding families.",
-    director: "Robert Wilson",
+    director: "Jamie Muscato",
     actors: ["James Parker", "Olivia Smith", "Thomas Miller", "Isabella Johnson"],
     images: [
       "/site_photos/romeo_and_juliet_1.png",
@@ -107,7 +107,7 @@ const performances: Performance[] = [
     startTime: "19:30",
     endTime: "22:15",
     description: "Macbeth is a tragedy by William Shakespeare; it is thought to have been first performed in 1606. It dramatizes the damaging physical and psychological effects of political ambition on those who seek power for its own sake.",
-    director: "David Thompson",
+    director: "Regrut Valery",
     actors: ["William Clark", "Charlotte White", "Henry Davis", "Grace Taylor"],
     images: [
       "/site_photos/Macbeth_1.png",
@@ -141,7 +141,7 @@ const performances: Performance[] = [
     startTime: "18:45",
     endTime: "21:30",
     description: "The Tempest is a play by William Shakespeare, probably written in 1610–1611, and thought to be one of the last plays that Shakespeare wrote alone. After the first scene, which takes place on a ship at sea during a tempest, the rest of the story is set on a remote island where the sorcerer Prospero, a complex and contradictory character, lives with his daughter Miranda, and his two servants—Caliban, a savage monster figure, and Ariel, an airy spirit.",
-    director: "Elizabeth Roberts",
+    director: "Regrut Valery",
     actors: ["Richard Morgan", "Jennifer Adams", "Matthew Wilson", "Emily Harris"],
     images: [
       "/site_photos/the_tempest_1.png",
@@ -175,7 +175,7 @@ const performances: Performance[] = [
     startTime: "20:15",
     endTime: "22:45",
     description: "A Midsummer Night's Dream is a comedy written by William Shakespeare in 1595/96. It portrays the events surrounding the marriage of Theseus, the Duke of Athens, to Hippolyta, the former queen of the Amazons.",
-    director: "Andrew Peterson",
+    director: "Regrut Valery",
     actors: ["Samuel Green", "Natalie Turner", "Christopher Lewis", "Victoria Moore"],
     images: [
       "/site_photos/a_midsummer_nights_dream_1.png",
